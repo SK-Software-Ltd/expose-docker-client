@@ -1,0 +1,15 @@
+services:
+    expose-client:
+        build: .
+        container_name: expose-client
+        network_mode: host
+        env_file: .env
+        # include config.php file from host
+        volumes:
+            - ./config.php:/app/config.php
+        command: >
+            expose 
+            share ${EXPOSE_SHARE_URL}
+            --subdomain=${EXPOSE_SUBDOMAIN}
+            -vvv
+        restart: unless-stopped
