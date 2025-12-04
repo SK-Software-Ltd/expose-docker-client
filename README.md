@@ -18,12 +18,15 @@ This Docker image is designed to run the Expose client, which allows you to shar
 ```
 
 ### Build image
-Build it
+
+Build and push for multiple platforms (amd64, arm64, arm/v7):
 ```bash
-  docker build -t wizzyto12/expose-client .
+  docker buildx create --name multiplatform-builder --use
+  docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t wizzyto12/expose-client:latest --push .
 ```
 
-Push it
+Or build locally for single platform:
 ```bash
+  docker build -t wizzyto12/expose-client .
   docker push wizzyto12/expose-client:latest
 ```
